@@ -63,9 +63,9 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9577102609E4D2796498D5D8 /* Pods_ZKPreviewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPreviewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83FBE4A5DCDDF189FFA84AC /* Pods-ZKPreviewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPreviewController_Example.debug.xcconfig"; path = "Target Support Files/Pods-ZKPreviewController_Example/Pods-ZKPreviewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		BE84F5A0E02F6E51DFCF76F5 /* ZKPreviewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ZKPreviewController.podspec; path = ../ZKPreviewController.podspec; sourceTree = "<group>"; };
-		D14C3171BAF7DB6C0112037D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		D814E936F99402168837B936 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		BE84F5A0E02F6E51DFCF76F5 /* ZKPreviewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ZKPreviewController.podspec; path = ../ZKPreviewController.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D14C3171BAF7DB6C0112037D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D814E936F99402168837B936 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F0EC7E0FBB01AC3F0EB5B204 /* Pods-ZKPreviewController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPreviewController_Tests.release.xcconfig"; path = "Target Support Files/Pods-ZKPreviewController_Tests/Pods-ZKPreviewController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +193,6 @@
 				85B4E5A1C978F6B7687D900B /* Pods-ZKPreviewController_Tests.debug.xcconfig */,
 				F0EC7E0FBB01AC3F0EB5B204 /* Pods-ZKPreviewController_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -259,6 +258,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -325,10 +325,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ZKPreviewController_Example/Pods-ZKPreviewController_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/ZKCategories/ZKCategories.framework",
 				"${BUILT_PRODUCTS_DIR}/ZKPreviewController/ZKPreviewController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKCategories.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKPreviewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
