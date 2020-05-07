@@ -19,6 +19,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
+  - Masonry (1.1.0)
   - ZKCategories (0.3.3):
     - ZKCategories/Core (= 0.3.3)
   - ZKCategories/Core (0.3.3)
@@ -27,6 +28,7 @@ PODS:
 
 DEPENDENCIES:
   - FBSnapshotTestCase
+  - Masonry
   - ZKCategories
   - ZKPreviewController (from `../`)
 
@@ -34,6 +36,7 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - FBSnapshotTestCase
+    - Masonry
     - ZKCategories
 
 EXTERNAL SOURCES:
@@ -43,9 +46,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ZKCategories: a4aeb9445ba93ff1976b6e40e86d332d00e4b79b
   ZKPreviewController: fa2025b64ee70a7c2f07c26066dd8179572588ed
 
-PODFILE CHECKSUM: 506590b571a3a0a572cb5ec0e08f4a3cd8dc1344
+PODFILE CHECKSUM: 12b42ff86d39f5b3c3e6cc0c0fdb637eed9f527e
 
 COCOAPODS: 1.9.1
