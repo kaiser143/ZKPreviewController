@@ -13,8 +13,8 @@
 static NSString *_KAILocalFilePathForURL(NSURL *URL, NSString *filename) {
     NSString *fileExtension   = [URL pathExtension];
     NSString *hashedURLString = [URL absoluteString].md5String;
-    NSString *cacheDirectory  = [UIApplication sharedApplication].cachesPath;
-    cacheDirectory            = [[cacheDirectory stringByAppendingPathComponent:@"com.kaiser.RemoteQuickLook"] stringByAppendingPathComponent:hashedURLString];
+    NSString *cacheDirectory  = [[UIApplication sharedApplication].cachesPath stringByAppendingPathComponent:@"com.kaiser.RemoteQuickLook"];
+    if (filename.isNotBlank) cacheDirectory = [cacheDirectory stringByAppendingPathComponent:hashedURLString];
     BOOL isDirectory;
     if (![[NSFileManager defaultManager] fileExistsAtPath:cacheDirectory isDirectory:&isDirectory] || !isDirectory) {
         NSError *error          = nil;
@@ -31,22 +31,35 @@ static NSString *_KAILocalFilePathForURL(NSURL *URL, NSString *filename) {
     }
     if (!fileExtension) fileExtension = [URL.absoluteString pathExtension];
 
-    NSString *temporaryFilePath = [[cacheDirectory stringByAppendingPathComponent:filename.isNotBlank ? filename : [URL.lastPathComponent stringByDeletingPathExtension]] stringByAppendingPathExtension:fileExtension];
+    NSString *temporaryFilePath = [[cacheDirectory stringByAppendingPathComponent:(filename.isNotBlank ? filename : hashedURLString)] stringByAppendingPathExtension:fileExtension];
     return temporaryFilePath;
 }
+
+@interface ZKPreviewItem ()
+
+@property (nonatomic, strong, readwrite) NSURL *previewItemURL;
+@property (nonatomic, strong, readwrite) NSString *previewItemTitle;
+@property (nonatomic, assign, readwrite) BOOL filenameHashed;
+
+@end
 
 @implementation ZKPreviewItem
 
 + (instancetype)itemWithURL:(NSURL *)URL title:(NSString *)title {
-    return [[self alloc] initWithURL:URL title:title];
+    return [self itemWithURL:URL title:title filenameHashed:YES];
 }
 
-- (instancetype)initWithURL:(NSURL *)URL title:(NSString *)title {
++ (instancetype)itemWithURL:(NSURL *)URL title:(nullable NSString *)title filenameHashed:(BOOL)filenameHashed {
+    return [[self alloc] initWithURL:URL title:title filenameHashed:filenameHashed];
+}
+
+- (instancetype)initWithURL:(NSURL *)URL title:(NSString *)title filenameHashed:(BOOL)filenameHashed {
     self = [super init];
     if (self == nil) return nil;
     
     self.previewItemURL = URL;
     self.previewItemTitle = title;
+    self.filenameHashed = filenameHashed;
     
     return self;
 }
@@ -84,7 +97,7 @@ static NSString *_KAILocalFilePathForURL(NSURL *URL, NSString *filename) {
         return previewItemCopy;
 
     // If it's a remote file, check cache
-    NSString *localFilePath        = _KAILocalFilePathForURL(originalURL, previewItemCopy.previewItemTitle);
+    NSString *localFilePath        = _KAILocalFilePathForURL(originalURL, previewItemCopy.filenameHashed ? nil : (previewItemCopy.previewItemTitle ?: [originalURL.lastPathComponent stringByDeletingPathExtension]));
     previewItemCopy.previewItemURL = [NSURL fileURLWithPath:localFilePath];
     if ([[NSFileManager defaultManager] fileExistsAtPath:localFilePath])
         return previewItemCopy;

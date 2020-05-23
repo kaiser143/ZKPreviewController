@@ -11,10 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZKPreviewItem : NSObject <QLPreviewItem>
 
-+ (instancetype)itemWithURL:(NSURL *)URL title:(NSString *)title;
++ (instancetype)itemWithURL:(NSURL *)URL title:(nullable NSString *)title;
++ (instancetype)itemWithURL:(NSURL *)URL title:(nullable NSString *)title filenameHashed:(BOOL)filenameHashed;
 
-@property (nonatomic, strong) NSURL *previewItemURL;
-@property (nonatomic, strong) NSString *previewItemTitle;
+@property (nonatomic, strong, readonly) NSURL *previewItemURL;
+@property (nonatomic, strong, readonly) NSString *previewItemTitle;
+
+// default: YES(使用md5 url 作为文件名)
+@property (nonatomic, assign, readonly) BOOL filenameHashed;
 
 @end
 
