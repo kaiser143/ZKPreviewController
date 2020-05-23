@@ -8,23 +8,13 @@
 #import "ZKPreviewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import <CommonCrypto/CommonDigest.h>
-
-static NSString *_KAIMD5StringFromNSString(NSString *string) {
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    unsigned char digest[CC_MD5_DIGEST_LENGTH], i;
-    CC_MD5([data bytes], (CC_LONG)[data length], digest);
-    NSMutableString *result = [NSMutableString string];
-    for (i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-        [result appendFormat:@"%02x", (int)(digest[i])];
-    }
-    return [result copy];
-}
+#import <ZKCategories/ZKCategories.h>
 
 static NSString *_KAILocalFilePathForURL(NSURL *URL) {
     NSString *fileExtension   = [URL pathExtension];
-    NSString *hashedURLString = _KAIMD5StringFromNSString([URL absoluteString]);
-    NSString *cacheDirectory  = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    cacheDirectory            = [cacheDirectory stringByAppendingPathComponent:@"com.kaiser.RemoteQuickLook"];
+    NSString *hashedURLString = [URL absoluteString].md5String;
+    NSString *cacheDirectory  = [UIApplication sharedApplication].cachesPath;
+    cacheDirectory            = [[cacheDirectory stringByAppendingPathComponent:@"com.kaiser.RemoteQuickLook"] stringByAppendingPathComponent:hashedURLString];
     BOOL isDirectory;
     if (![[NSFileManager defaultManager] fileExistsAtPath:cacheDirectory isDirectory:&isDirectory] || !isDirectory) {
         NSError *error          = nil;
@@ -41,7 +31,7 @@ static NSString *_KAILocalFilePathForURL(NSURL *URL) {
     }
     if (!fileExtension) fileExtension = [URL.absoluteString pathExtension];
 
-    NSString *temporaryFilePath = [[cacheDirectory stringByAppendingPathComponent:hashedURLString] stringByAppendingPathExtension:fileExtension];
+    NSString *temporaryFilePath = [cacheDirectory stringByAppendingPathComponent:URL.lastPathComponent];
     return temporaryFilePath;
 }
 

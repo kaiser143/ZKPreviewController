@@ -25,6 +25,7 @@ PODS:
   - ZKCategories/Core (0.3.3)
   - ZKPreviewController (0.1.0):
     - AFNetworking (~> 3.0)
+    - ZKCategories (~> 0.3.0)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
@@ -48,7 +49,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ZKCategories: a4aeb9445ba93ff1976b6e40e86d332d00e4b79b
-  ZKPreviewController: fa2025b64ee70a7c2f07c26066dd8179572588ed
+  ZKPreviewController: ec7d345e8c35740a9e96d2521055d7069f9ddba9
 
 PODFILE CHECKSUM: 12b42ff86d39f5b3c3e6cc0c0fdb637eed9f527e
 
