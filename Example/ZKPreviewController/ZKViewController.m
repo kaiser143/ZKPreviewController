@@ -34,7 +34,7 @@
                                    ZKPreviewController *controller = [[ZKPreviewController alloc] init];
                                    controller.items                = @[
                                        [ZKPreviewItem itemWithURL:@"http://www.igg.cas.cn/xwzx/kyjz/201404/W020140417581719774926.pdf".URL
-                                                            title:@"科学研究动态监测快报"],
+                                                            title:/*@"科学研究动态监测快报"*/nil],
                                        [ZKPreviewItem itemWithURL:@"http://www.jyb.cn/info/jyzck/201309/P020130906611930584243.docx".URL
                                                             title:@"教育法律一揽子修订草案(征求意见稿) 条文对照表"],
                                    ];

@@ -10,7 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <ZKCategories/ZKCategories.h>
 
-static NSString *_KAILocalFilePathForURL(NSURL *URL) {
+static NSString *_KAILocalFilePathForURL(NSURL *URL, NSString *filename) {
     NSString *fileExtension   = [URL pathExtension];
     NSString *hashedURLString = [URL absoluteString].md5String;
     NSString *cacheDirectory  = [UIApplication sharedApplication].cachesPath;
@@ -31,7 +31,7 @@ static NSString *_KAILocalFilePathForURL(NSURL *URL) {
     }
     if (!fileExtension) fileExtension = [URL.absoluteString pathExtension];
 
-    NSString *temporaryFilePath = [cacheDirectory stringByAppendingPathComponent:URL.lastPathComponent];
+    NSString *temporaryFilePath = [[cacheDirectory stringByAppendingPathComponent:filename.isNotBlank ? filename : [URL.lastPathComponent stringByDeletingPathExtension]] stringByAppendingPathExtension:fileExtension];
     return temporaryFilePath;
 }
 
@@ -84,7 +84,7 @@ static NSString *_KAILocalFilePathForURL(NSURL *URL) {
         return previewItemCopy;
 
     // If it's a remote file, check cache
-    NSString *localFilePath        = _KAILocalFilePathForURL(originalURL);
+    NSString *localFilePath        = _KAILocalFilePathForURL(originalURL, previewItemCopy.previewItemTitle);
     previewItemCopy.previewItemURL = [NSURL fileURLWithPath:localFilePath];
     if ([[NSFileManager defaultManager] fileExistsAtPath:localFilePath])
         return previewItemCopy;
